@@ -9,11 +9,11 @@ const dataLokasi = [
     tag: "Balai Warga",
     tagClass: "tag-fasum",
     address: "356 Jl. Cikuray III, RT 03/RW 03, Gajahmungkur",
-    desc: "Sekretariat utama warga RW 03, pusat pelayanan administrasi kependudukan, kegiatan PKK, rapat warga, dan posko keamanan siaga.",
+    desc: "Pusat kegiatan warga RW 03, pengurusan administrasi kependudukan, rapat rukun warga, posyandu terpadu, dan kegiatan PKK lingkungan.",
     lat: -7.009495,
     lng: 110.407987,
     link: "https://maps.app.goo.gl/x8bKYuooY7FfSCmd7",
-    image: null,
+    image: "foto balai.jpg",
   },
   {
     id: 2,
@@ -196,5 +196,5 @@ drawerNavItems.forEach((item) => {
   item.addEventListener("click", closeDrawer);
 });
 
-// Render data awal
+// Render awal saat dimuat
 renderPlaces(dataLokasi);
