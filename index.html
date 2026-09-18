@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sekretariat RW 03 Gajahmungkur, Semarang</title>
 
+    <!-- Favicon / Ikon Tab Browser -->
+    <link rel="icon" type="image/webp" href="logo rw3.webp" />
+
     <!-- Leaflet Map CSS -->
     <link
       rel="stylesheet"
@@ -24,12 +27,11 @@
             <img src="logo rw3.webp" alt="Logo RW 03" class="site-logo" />
           </a>
 
+          <!-- Desktop Navigation -->
           <ul class="nav-links">
             <li><a href="#beranda" class="active-nav">Beranda</a></li>
-            <li><a href="#layanan">Tentang Kami ▾</a></li>
-            <li><a href="#layanan">Layanan ▾</a></li>
-            <li><a href="#fasum">Informasi ▾</a></li>
-            <li><a href="#kontak">Hubungi Kami</a></li>
+            <li><a href="#layanan">Layanan</a></li>
+            <li><a href="#fasum">Informasi</a></li>
           </ul>
         </div>
 
@@ -69,6 +71,8 @@
               ></path>
             </svg>
           </button>
+
+          <!-- Tombol Hamburger Mobile -->
           <button
             class="mobile-toggle"
             id="menuToggle"
@@ -94,7 +98,26 @@
       </div>
     </nav>
 
-    <!-- HERO SECTION (CLEAN TANPA SLOGAN) -->
+    <!-- MOBILE DRAWER MENU OVERLAY -->
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+    <aside class="mobile-drawer" id="mobileDrawer">
+      <div class="drawer-header">
+        <span class="drawer-title">Menu RW 03</span>
+        <button class="drawer-close" id="drawerClose" aria-label="Tutup Menu">
+          ✕
+        </button>
+      </div>
+      <ul class="drawer-links">
+        <li><a href="#beranda" class="drawer-nav-item">Beranda</a></li>
+        <li><a href="#layanan" class="drawer-nav-item">Layanan</a></li>
+        <li><a href="#fasum" class="drawer-nav-item">Informasi</a></li>
+      </ul>
+      <div class="drawer-footer">
+        Sekretariat RW 03 Kelurahan Gajahmungkur, Kota Semarang
+      </div>
+    </aside>
+
+    <!-- HERO SECTION -->
     <header class="hero-section" id="beranda">
       <h1 class="hero-title">RW 03 Gajahmungkur</h1>
     </header>
@@ -198,7 +221,7 @@
           type="text"
           id="searchInput"
           class="search-input"
-          placeholder="Cari puskesmas, balai, sambal..."
+          placeholder="Cari puskesmas, balai..."
         />
       </div>
 
@@ -209,14 +232,14 @@
       <div class="places-list" id="placesContainer"></div>
     </section>
 
-    <!-- FOOTER (MINIMALIS TANPA IKON SOSMED) -->
+    <!-- FOOTER -->
     <footer class="site-footer" id="kontak">
       <div class="footer-container">
         <div class="footer-info">
           <h4>Sekretariat RW 03 Gajahmungkur</h4>
           <p class="footer-address">
-            Jl. Gajahmungkur Asri No. 3, Kelurahan Gajahmungkur, Kota Semarang,
-            Jawa Tengah 50232
+            356 Jl. Cikuray III, RT 03/RW 03, Kelurahan Gajahmungkur, Kota
+            Semarang, Jawa Tengah 50232
           </p>
         </div>
       </div>

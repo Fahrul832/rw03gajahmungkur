@@ -79,7 +79,7 @@ a {
 }
 
 /* ===================================================
-   NAVBAR
+   NAVBAR (LOGO BESAR & JARAK MENJAUH)
    =================================================== */
 .navbar {
   position: sticky;
@@ -106,7 +106,7 @@ a {
 .nav-left {
   display: flex;
   align-items: center;
-  gap: 72px;
+  gap: 72px; /* Jarak antara logo dan menu tautan */
 }
 
 .brand-logo {
@@ -176,7 +176,101 @@ a {
 }
 
 /* ===================================================
-   HERO SECTION (CLEAN TANPA SLOGAN)
+   MOBILE DRAWER NAVIGATION
+   =================================================== */
+.mobile-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.4);
+  backdrop-filter: blur(4px);
+  z-index: 1100;
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 0.3s ease,
+    visibility 0.3s ease;
+}
+
+.mobile-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.mobile-drawer {
+  position: fixed;
+  top: 0;
+  right: -300px;
+  width: 280px;
+  height: 100%;
+  background: var(--bg-surface);
+  border-left: 1px solid var(--border-color);
+  z-index: 1200;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 24px 20px;
+  transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: -10px 0 25px rgba(0, 0, 0, 0.1);
+}
+
+.mobile-drawer.active {
+  right: 0;
+}
+
+.drawer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.drawer-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.drawer-close {
+  background: transparent;
+  border: none;
+  font-size: 18px;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 4px;
+}
+
+.drawer-links {
+  list-style: none;
+  margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.drawer-links a {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-main);
+  display: block;
+  padding: 8px 0;
+  transition: color 0.2s;
+}
+
+.drawer-links a:hover {
+  color: var(--primary);
+}
+
+.drawer-footer {
+  font-size: 11px;
+  color: var(--text-muted);
+  line-height: 1.5;
+  border-top: 1px solid var(--border-light);
+  padding-top: 16px;
+}
+
+/* ===================================================
+   HERO SECTION
    =================================================== */
 .hero-section {
   position: relative;
@@ -422,7 +516,7 @@ a {
 }
 
 /* ===================================================
-   FOOTER (BERSIH & LAPANG)
+   FOOTER
    =================================================== */
 .site-footer {
   border-top: 1px solid var(--border-light);
