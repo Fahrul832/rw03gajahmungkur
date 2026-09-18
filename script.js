@@ -1,6 +1,5 @@
 // =========================================================================
-// DATA LOKASI RESMI RW 03 GAJAHMUNGKUR
-// Balai RW 03: 356 Jl. Cikuray III (https://maps.app.goo.gl/x8bKYuooY7FfSCmd7)
+// DATA LOKASI RESMI RW 03 GAJAHMUNGKUR (MENGGUNAKAN GOOGLE MAPS RESMI)
 // =========================================================================
 const dataLokasi = [
   {
@@ -14,7 +13,7 @@ const dataLokasi = [
     lat: -7.009495,
     lng: 110.407987,
     link: "https://maps.app.goo.gl/x8bKYuooY7FfSCmd7",
-    pinColor: "#B91C1C",
+    image: null,
   },
   {
     id: 2,
@@ -24,10 +23,10 @@ const dataLokasi = [
     tagClass: "tag-fasum",
     address: "Jl. Lamongan Raya No. 2, Gajahmungkur",
     desc: "Puskesmas pembina wilayah kerja Gajahmungkur. Melayani imunisasi balita terpadu, poli umum, BPJS, dan posyandu lansia rutin.",
-    lat: -7.00512,
-    lng: 110.40781,
-    link: "https://maps.google.com/?q=Puskesmas+Pegandan+Semarang",
-    pinColor: "#B91C1C",
+    lat: -7.009095,
+    lng: 110.404882,
+    link: "https://maps.app.goo.gl/sABiozHJVoT2G6VJ8",
+    image: "puskesmas.jpg",
   },
   {
     id: 3,
@@ -40,72 +39,15 @@ const dataLokasi = [
     lat: -7.01021,
     lng: 110.41282,
     link: "https://maps.google.com/?q=Kantor+Kelurahan+Gajahmungkur+Semarang",
-    pinColor: "#B91C1C",
+    image: "foto kelurahan.jpg",
   },
 ];
 
 // =========================================================================
-// INISIALISASI PETA LEAFLET (FOKUS BALAI RW 03)
-// =========================================================================
-const map = L.map("map", { scrollWheelZoom: false }).setView(
-  [-7.009495, 110.407987],
-  16,
-);
-
-const lightTileLayer = L.tileLayer(
-  "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
-  {
-    attribution: "&copy; OpenStreetMap &copy; CARTO",
-    maxZoom: 19,
-  },
-);
-
-const darkTileLayer = L.tileLayer(
-  "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png",
-  {
-    attribution: "&copy; OpenStreetMap &copy; CARTO",
-    maxZoom: 19,
-  },
-);
-
-let currentTileLayer = lightTileLayer.addTo(map);
-let markers = {};
-
-function createCustomPin(color) {
-  return L.divIcon({
-    className: "clean-map-pin",
-    html: `<div style="background-color: ${color}; width: 14px; height: 14px; border-radius: 50%; border: 2.5px solid white; box-shadow: 0 2px 6px rgba(0,0,0,0.35);"></div>`,
-    iconSize: [14, 14],
-    iconAnchor: [7, 7],
-  });
-}
-
-function renderMarkers() {
-  dataLokasi.forEach((item) => {
-    const marker = L.marker([item.lat, item.lng], {
-      icon: createCustomPin(item.pinColor),
-    }).addTo(map);
-
-    const popupContent = `
-      <div style="font-family: inherit; padding: 4px;">
-        <div style="font-weight: 700; font-size: 13px; margin-bottom: 2px;">${item.title}</div>
-        <div style="font-size: 11px; opacity: 0.75; margin-bottom: 6px;">${item.address}</div>
-        <a href="${item.link}" target="_blank" style="font-size: 11px; font-weight: 700; color: ${item.pinColor}; text-decoration: none;">
-          Buka di Google Maps &rsaquo;
-        </a>
-      </div>
-    `;
-
-    marker.bindPopup(popupContent);
-    markers[item.id] = marker;
-  });
-}
-renderMarkers();
-
-// =========================================================================
-// RENDER DAFTAR KARTU
+// RENDER DAFTAR KARTU DENGAN BANNER GAMBAR
 // =========================================================================
 const placesContainer = document.getElementById("placesContainer");
+const gmapFrame = document.getElementById("gmapFrame");
 
 function renderPlaces(list) {
   placesContainer.innerHTML = "";
@@ -124,23 +66,33 @@ function renderPlaces(list) {
     const card = document.createElement("div");
     card.className = "place-card";
 
+    // Klik kartu untuk memindahkan fokus peta Google Maps langsung ke koordinatnya
     card.onclick = () => {
-      map.flyTo([item.lat, item.lng], 17, { duration: 1 });
-      if (markers[item.id]) markers[item.id].openPopup();
+      if (gmapFrame) {
+        gmapFrame.src = `https://maps.google.com/maps?q=${item.lat},${item.lng}&hl=id&z=17&output=embed`;
+      }
       window.scrollTo({
         top: document.querySelector(".map-box").offsetTop - 90,
         behavior: "smooth",
       });
     };
 
+    // Render Banner Foto bila properti image tersedia
+    const imageBanner = item.image
+      ? `<div class="card-banner"><img src="${item.image}" alt="${item.title}" class="card-img" onerror="this.parentElement.style.display='none'"></div>`
+      : "";
+
     card.innerHTML = `
-      <span class="place-tag ${item.tagClass}">${item.tag}</span>
-      <h4 class="place-title">${item.title}</h4>
-      <p class="place-address">📍 ${item.address}</p>
-      <p class="place-desc">${item.desc}</p>
-      <a href="${item.link}" target="_blank" class="place-link ${item.category === "umkm" ? "umkm" : ""}" onclick="event.stopPropagation()">
-        Buka di Google Maps &rsaquo;
-      </a>
+      ${imageBanner}
+      <div class="card-body">
+        <span class="place-tag ${item.tagClass}">${item.tag}</span>
+        <h4 class="place-title">${item.title}</h4>
+        <p class="place-address">📍 ${item.address}</p>
+        <p class="place-desc">${item.desc}</p>
+        <a href="${item.link}" target="_blank" class="place-link" onclick="event.stopPropagation()">
+          Buka di Google Maps &rsaquo;
+        </a>
+      </div>
     `;
 
     placesContainer.appendChild(card);
@@ -193,16 +145,10 @@ function applyTheme(isDark) {
     document.body.classList.add("dark-mode");
     sunIcon.classList.remove("hidden");
     moonIcon.classList.add("hidden");
-
-    map.removeLayer(currentTileLayer);
-    currentTileLayer = darkTileLayer.addTo(map);
   } else {
     document.body.classList.remove("dark-mode");
     sunIcon.classList.add("hidden");
     moonIcon.classList.remove("hidden");
-
-    map.removeLayer(currentTileLayer);
-    currentTileLayer = lightTileLayer.addTo(map);
   }
 }
 
@@ -250,5 +196,5 @@ drawerNavItems.forEach((item) => {
   item.addEventListener("click", closeDrawer);
 });
 
-// Render awal saat halaman dimuat
+// Render data awal
 renderPlaces(dataLokasi);
