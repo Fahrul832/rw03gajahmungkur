@@ -55,8 +55,8 @@ function renderPlaces(list) {
   if (list.length === 0) {
     placesContainer.innerHTML = `
       <div style="grid-column: 1/-1; text-align: center; padding: 48px 20px; border: 1px dashed var(--border-color); border-radius: 14px; background: var(--bg-surface);">
-        <p style="font-size: 14px; font-weight: 600; color: var(--text-main); margin-bottom: 4px;">Belum Ada Data UMKM</p>
-        <p style="font-size: 12px; color: var(--text-muted); line-height: 1.5;">Data produk dan usaha unggulan warga RW 03 saat ini sedang dalam proses pendataan oleh pengurus.</p>
+        <p style="font-size: 14px; font-weight: 600; color: var(--text-main); margin-bottom: 4px;">Data Tidak Ditemukan</p>
+        <p style="font-size: 12px; color: var(--text-muted); line-height: 1.5;">Tidak ada titik lokasi atau fasilitas yang sesuai dengan kata kunci pencarian Anda.</p>
       </div>
     `;
     return;
